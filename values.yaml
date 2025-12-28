@@ -35,7 +35,7 @@ namespace:
 
 prometheus:
   # prometheus.enabled -- enables the prometheus metrics scraping (default: false)
-  enabled: true
+  enabled: false
 # ServiceMonitor for Prometheus Operator
 serviceMonitor:
   enabled: true  # Create ServiceMonitor resource
