@@ -35,11 +35,11 @@ namespace:
 
 prometheus:
   # prometheus.enabled -- enables the prometheus metrics scraping (default: false)
-  enabled: false
+  enabled: true
 
 authProxy:
   # authProxy.enabled -- enables the protection of /metrics endpoint. (https://github.com/brancz/kube-rbac-proxy)
-  enabled: true
+  enabled: false
   image:
     # authProxy.image.registry
     registry: gcr.io
