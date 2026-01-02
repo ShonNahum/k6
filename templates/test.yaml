@@ -24,7 +24,7 @@ metadata:
   name: simple-k6-test
   namespace: k6
 spec:
-  parallelism: 1
+  parallelism: 2
   script:
     configMap:
       name: k6-script
