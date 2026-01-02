@@ -18,14 +18,35 @@ data:
       sleep(1);
     }
 ---
-apiVersion: k6.io/v1alpha1
-kind: K6
+apiVersion: batch/v1
+kind: CronJob
 metadata:
-  name: simple-k6-test
+  name: k6-test-cron
   namespace: k6
 spec:
-  parallelism: 2
-  script:
-    configMap:
-      name: k6-script
-      file: script.js
+  schedule: "*/10 * * * *"  # every 10 minutes
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: kubectl
+            image: bitnami/kubectl:latest
+            command:
+            - /bin/sh
+            - -c
+            - |
+              cat <<'EOF' | kubectl apply -f -
+              apiVersion: k6.io/v1alpha1
+              kind: K6
+              metadata:
+                name: simple-k6-test-$(date +%s)  # unique name each run
+                namespace: k6
+              spec:
+                parallelism: 2
+                script:
+                  configMap:
+                    name: k6-script
+                    file: script.js
+              EOF
