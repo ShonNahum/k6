@@ -27,7 +27,7 @@ spec:
   schedule: "*/1 * * * *"  # every 10 minutes
   jobTemplate:
     spec:
-      ttlSecondsAfterFinished: 3600  # auto-delete finished Job after 1 hour
+      ttlSecondsAfterFinished: 180  # delete finished Job after 1 hour
       template:
         spec:
           restartPolicy: OnFailure
@@ -38,7 +38,7 @@ spec:
             - /bin/sh
             - -c
             - |
-              cat <<'EOF' | kubectl apply -f -
+              kubectl create -f - <<EOF
               apiVersion: k6.io/v1alpha1
               kind: K6
               metadata:
