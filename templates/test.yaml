@@ -24,7 +24,7 @@ metadata:
   name: k6-test-cron
   namespace: k6
 spec:
-  schedule: "*/10 * * * *"  # every 10 minutes
+  schedule: "*/1 * * * *"  # every 10 minutes
   jobTemplate:
     spec:
       ttlSecondsAfterFinished: 3600  # auto-delete finished Job after 1 hour
