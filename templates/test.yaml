@@ -27,6 +27,7 @@ spec:
   schedule: "*/10 * * * *"  # every 10 minutes
   jobTemplate:
     spec:
+      ttlSecondsAfterFinished: 3600  # auto-delete finished Job after 1 hour
       template:
         spec:
           restartPolicy: OnFailure
@@ -41,7 +42,7 @@ spec:
               apiVersion: k6.io/v1alpha1
               kind: K6
               metadata:
-                name: simple-k6-test-$(date +%s)  # unique name each run
+                generateName: simple-k6-test-
                 namespace: k6
               spec:
                 parallelism: 2
